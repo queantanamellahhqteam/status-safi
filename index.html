@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f6f1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="STATUS SAFI — prepare videos and photos for WhatsApp Status.">
+  <title>STATUS SAFI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="splash" class="splash" aria-hidden="true">
+    <span class="mark mark-large"><b>SS</b><i></i></span>
+    <p class="splash-name">STATUS SAFI</p>
+    <p class="splash-tag">Clean Quality. Better Status.</p>
+  </div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#homePage" aria-label="STATUS SAFI home">
+        <span class="mark"><b>SS</b><i></i></span>
+        <span class="brand-name">STATUS <em>SAFI</em></span>
+      </a>
+      <button class="help-button" id="helpBtn" type="button" aria-label="Help">?</button>
+    </div>
+  </header>
+
+  <main id="app" class="app">
+
+    <section id="homePage" class="page active">
+      <div class="hero">
+        <p class="eyebrow">Welcome to STATUS SAFI</p>
+        <h1>Make your status <span>look exceptional.</span></h1>
+        <p class="hero-text">Prepare your videos and photos for WhatsApp Status. Videos longer than 60 seconds are automatically split into consecutive parts.</p>
+      </div>
+
+      <div class="tool-list">
+        <button class="tool-card" type="button" data-open="videoPage">
+          <span class="tool-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10.5 9.5v5l4.2-2.5z" fill="currentColor"/></svg>
+          </span>
+          <span class="tool-text">
+            <span class="tool-title">Enhance Video</span>
+            <span class="tool-desc">Optimize video and preserve its original shape.</span>
+          </span>
+          <span class="tool-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+          </span>
+        </button>
+
+        <button class="tool-card" type="button" data-open="photoPage">
+          <span class="tool-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg>
+          </span>
+          <span class="tool-text">
+            <span class="tool-title">Enhance Photo</span>
+            <span class="tool-desc">Share your original photo without resizing.</span>
+          </span>
+          <span class="tool-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+          </span>
+        </button>
+      </div>
+
+      <div class="notice">
+        <span class="notice-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        </span>
+        <p><b>Automatic video splitting.</b> Videos over 60 seconds are split into consecutive 60-second parts. Original orientation is preserved.</p>
+      </div>
+    </section>
+
+    <section id="videoPage" class="page">
+      <button class="back-button" type="button" data-back>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        Back to home
+      </button>
+
+      <div class="page-heading">
+        <p class="eyebrow">Video studio</p>
+        <h2>Enhance video</h2>
+        <p class="lead">Choose a video. We keep its aspect ratio and automatically split it when it is longer than 60 seconds.</p>
+      </div>
+
+      <label class="upload-box" for="videoInput">
+        <span class="upload-symbol" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+        <b>Choose a video from your device</b>
+        <small>MP4, MOV and other formats your browser supports</small>
+      </label>
+      <input id="videoInput" type="file" accept="video/*" hidden>
+
+      <div id="videoInfo" class="panel is-hidden">
+        <video id="videoPreview" controls playsinline></video>
+        <div class="file-meta"><b id="videoName"></b><span id="videoMeta"></span></div>
+        <label class="field-label" for="qualitySelect">Output quality</label>
+        <select id="qualitySelect" class="select-field">
+          <option value="18">Very high quality</option>
+          <option value="21" selected>High quality</option>
+          <option value="25">Smaller file</option>
+        </select>
+        <p class="hint">Videos up to 60 seconds stay as one video. Longer videos are split into 60-second parts. Everything happens on your device.</p>
+        <button id="processVideoBtn" class="primary-button" type="button">Prepare video</button>
+      </div>
+
+      <div id="videoProgress" class="panel progress-panel is-hidden" aria-live="polite">
+        <div class="progress-top">
+          <b id="progressText">Preparing video engine…</b>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div id="progressTrack" class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progressBar"></span></div>
+        <p id="progressHint" class="hint">Keep this page open while processing. The first use needs internet to download the video engine.</p>
+      </div>
+
+      <div id="videoResults" class="panel results-panel is-hidden">
+        <h3>Your videos are ready</h3>
+        <p class="hint">Share the parts to WhatsApp in order. To avoid extra compression, choose HD when available.</p>
+        <div id="videoDownloads" class="download-list"></div>
+        <button id="shareAllVideosBtn" class="primary-button" type="button">Share all parts</button>
+      </div>
+    </section>
+
+    <section id="photoPage" class="page">
+      <button class="back-button" type="button" data-back>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        Back to home
+      </button>
+
+      <div class="page-heading">
+        <p class="eyebrow">Photo studio</p>
+        <h2>Enhance photo</h2>
+        <p class="lead">Choose a photo and share the original file. STATUS SAFI does not change its size or quality.</p>
+      </div>
+
+      <label class="upload-box" for="photoInput">
+        <span class="upload-symbol" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+        <b>Choose a photo from your device</b>
+        <small>JPG, PNG, HEIC (if your browser supports it)</small>
+      </label>
+      <input id="photoInput" type="file" accept="image/*" hidden>
+
+      <div id="photoInfo" class="panel is-hidden">
+        <img id="photoPreview" alt="Selected photo preview">
+        <div class="file-meta"><b id="photoName"></b><span id="photoMeta"></span></div>
+        <button id="processPhotoBtn" class="primary-button" type="button">Share original photo</button>
+        <p class="hint">Your original file is shared without resizing or recompression. In the share menu, choose WhatsApp. Send it as a document if you want to avoid WhatsApp's image compression.</p>
+      </div>
+    </section>
+
+    <footer class="footer">© Queantanamellah HQ. All rights reserved.</footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
