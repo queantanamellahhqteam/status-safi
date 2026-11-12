@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080d19">
+  <meta name="description" content="STATUS SAFI — prepare videos and photos for WhatsApp Status.">
+  <title>STATUS SAFI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <section id="intro" class="intro" aria-label="STATUS SAFI introduction">
+    <div class="intro-glow"></div>
+    <div class="brand-mark intro-mark" aria-hidden="true"><span>SS</span><i></i></div>
+    <h1 class="intro-name">STATUS <span>SAFI</span></h1>
+    <p class="intro-tagline">Clean Quality. Better Status.</p>
+    <div class="intro-line"></div>
+  </section>
+
+  <main id="app" class="app is-hidden">
+    <header class="topbar glass-soft">
+      <a class="brand" href="#homePage" aria-label="STATUS SAFI home">
+        <span class="brand-mark small"><span>SS</span><i></i></span>
+        <span class="brand-name">STATUS <b>SAFI</b></span>
+      </a>
+      <button class="icon-button" id="helpBtn" aria-label="Help" title="Help">?</button>
+    </header>
+
+    <section id="homePage" class="page active">
+      <div class="hero">
+        <p class="eyebrow">WELCOME TO STATUS SAFI</p>
+        <h2>Make your status<br><span>look exceptional.</span></h2>
+        <p class="muted">Prepare your videos and photos for WhatsApp Status. Videos longer than 60 seconds are automatically split into consecutive parts.</p>
+      </div>
+      <div class="tool-grid">
+        <button class="tool-card featured" data-open="videoPage">
+          <span class="tool-icon">▶</span><span class="tool-title">Enhance Video</span>
+          <span class="tool-desc">Optimize video and preserve its original shape.</span><span class="tool-arrow">↗</span>
+        </button>
+        <button class="tool-card" data-open="photoPage">
+          <span class="tool-icon">▧</span><span class="tool-title">Enhance Photo</span>
+          <span class="tool-desc">Share your original photo without resizing.</span><span class="tool-arrow">↗</span>
+        </button>
+      </div>
+      <div class="notice glass-soft"><span class="notice-icon">✦</span><p><b>Automatic video splitting.</b> Videos over 60 seconds are split into consecutive 60-second parts. Original orientation is preserved.</p></div>
+    </section>
+
+    <section id="videoPage" class="page">
+      <button class="back-button" data-back>← Back to home</button>
+      <div class="page-heading"><p class="eyebrow">VIDEO STUDIO</p><h2>Enhance video</h2><p class="muted">Choose a video. We will preserve its aspect ratio and automatically split it when it exceeds 60 seconds.</p></div>
+      <label class="upload-box glass" for="videoInput"><span class="upload-symbol">＋</span><b>Choose a video from your device</b><small>MP4, MOV and other browser-supported video formats</small></label>
+      <input id="videoInput" type="file" accept="video/*" hidden>
+      <div id="videoInfo" class="media-panel glass is-hidden">
+        <video id="videoPreview" controls playsinline></video>
+        <div class="file-meta"><b id="videoName"></b><span id="videoMeta" class="muted"></span></div>
+        <label class="field-label" for="qualitySelect">Output quality</label>
+        <select id="qualitySelect" class="select-field">
+          <option value="18">Very high quality</option>
+          <option value="21" selected>High quality</option>
+          <option value="25">Smaller file</option>
+        </select>
+        <p class="hint">Videos up to 60 seconds stay as one video. Longer videos are automatically split into 60-second parts. Processing happens on your device.</p>
+        <button id="processVideoBtn" class="primary-button">Prepare video</button>
+      </div>
+      <div id="videoProgress" class="progress-panel glass is-hidden"><div class="progress-top"><b id="progressText">Preparing video engine…</b><span id="progressPercent">0%</span></div><div class="progress-track"><span id="progressBar"></span></div><p id="progressHint" class="hint">Keep this page open while processing. The first load needs an internet connection to download the video engine.</p></div>
+      <div id="videoResults" class="results-panel glass is-hidden"><h3>Your videos are ready</h3><p class="hint">Share the parts to WhatsApp in order. To avoid extra compression, choose HD when available.</p><div id="videoDownloads" class="download-list"></div><button id="shareAllVideosBtn" class="primary-button">Share video parts</button></div>
+    </section>
+
+    <section id="photoPage" class="page">
+      <button class="back-button" data-back>← Back to home</button>
+      <div class="page-heading"><p class="eyebrow">PHOTO STUDIO</p><h2>Enhance photo</h2><p class="muted">Choose a photo and share the original file. Its dimensions and quality will not be changed by STATUS SAFI.</p></div>
+      <label class="upload-box glass" for="photoInput"><span class="upload-symbol">＋</span><b>Choose a photo from your device</b><small>JPG, PNG, HEIC (if supported by your browser)</small></label>
+      <input id="photoInput" type="file" accept="image/*" hidden>
+      <div id="photoInfo" class="media-panel glass is-hidden"><img id="photoPreview" alt="Selected photo preview"><div class="file-meta"><b id="photoName"></b><span id="photoMeta" class="muted"></span></div><button id="processPhotoBtn" class="primary-button">Share original photo</button><p class="hint">Your original image file is shared without resizing or recompression. In the share menu, select WhatsApp. Send as a document if you want to avoid WhatsApp image compression.</p></div>
+    </section>
+
+    <footer class="footer">© Queantanamellah HQ. All rights reserved.</footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
