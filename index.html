@@ -7,7 +7,7 @@
   <meta name="color-scheme" content="light">
   <meta name="description" content="STATUS SAFI — prepare videos and photos for WhatsApp Status.">
   <title>STATUS SAFI</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
   <div id="splash" class="splash" aria-hidden="true">
@@ -80,7 +80,7 @@
       <div class="page-heading">
         <p class="eyebrow">Video studio</p>
         <h2>Enhance video</h2>
-        <p class="lead">Choose a video. We keep its aspect ratio and automatically split it when it is longer than 60 seconds.</p>
+        <p class="lead">Choose a video, then crop it, add text or music, and prepare it for WhatsApp Status. Videos longer than 60 seconds are split automatically.</p>
       </div>
 
       <label class="upload-box" for="videoInput">
@@ -93,15 +93,106 @@
       <input id="videoInput" type="file" accept="video/*" hidden>
 
       <div id="videoInfo" class="panel is-hidden">
-        <video id="videoPreview" controls playsinline></video>
+        <div id="stage" class="stage">
+          <video id="videoBg" class="stage-bg is-hidden" muted playsinline aria-hidden="true" tabindex="-1"></video>
+          <video id="videoPreview" controls playsinline></video>
+          <canvas id="textCanvas" class="stage-text" aria-hidden="true"></canvas>
+        </div>
         <div class="file-meta"><b id="videoName"></b><span id="videoMeta"></span></div>
+        <p id="outputSummary" class="summary"></p>
+
+        <div class="tabs" role="tablist" aria-label="Edit options">
+          <button type="button" class="tab is-active" role="tab" aria-selected="true" data-tab="cropTab">Crop</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-tab="trimTab">Trim</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-tab="textTab">Text</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-tab="musicTab">Music</button>
+          <button type="button" class="tab" role="tab" aria-selected="false" data-tab="captionTab">Caption</button>
+        </div>
+
+        <div id="cropTab" class="tab-panel" role="tabpanel">
+          <p class="field-label">Shape</p>
+          <div id="aspectGroup" class="chips" role="group" aria-label="Shape">
+            <button type="button" class="chip is-active" data-aspect="orig" aria-pressed="true">Original</button>
+            <button type="button" class="chip" data-aspect="9:16" aria-pressed="false">9:16 Status</button>
+            <button type="button" class="chip" data-aspect="4:5" aria-pressed="false">4:5</button>
+            <button type="button" class="chip" data-aspect="1:1" aria-pressed="false">1:1</button>
+          </div>
+          <div id="fitGroup" class="is-hidden">
+            <p class="field-label">How to fit</p>
+            <div id="fitChips" class="chips" role="group" aria-label="How to fit">
+              <button type="button" class="chip is-active" data-fit="fill" aria-pressed="true">Fill (crop the edges)</button>
+              <button type="button" class="chip" data-fit="fit" aria-pressed="false">Fit (blurred sides)</button>
+            </div>
+          </div>
+          <div id="posGroup" class="is-hidden">
+            <label class="field-label" for="cropPos">Move the crop <span id="posAxis"></span></label>
+            <input id="cropPos" class="range" type="range" min="0" max="100" value="50">
+          </div>
+          <p class="hint">Choose 9:16 for a full-screen Status. "Fit" keeps the whole picture and fills the empty space with a blurred copy.</p>
+        </div>
+
+        <div id="trimTab" class="tab-panel is-hidden" role="tabpanel">
+          <div class="range-row"><label class="field-label" for="trimStart">Start</label><output id="trimStartLabel">0:00.0</output></div>
+          <input id="trimStart" class="range" type="range" min="0" max="1" step="0.1" value="0">
+          <div class="range-row"><label class="field-label" for="trimEnd">End</label><output id="trimEndLabel">0:00.0</output></div>
+          <input id="trimEnd" class="range" type="range" min="0" max="1" step="0.1" value="1">
+          <p id="trimSummary" class="hint"></p>
+        </div>
+
+        <div id="textTab" class="tab-panel is-hidden" role="tabpanel">
+          <label class="field-label" for="textInput">Text on the video</label>
+          <textarea id="textInput" class="text-field" rows="2" maxlength="140" placeholder="Type your text here"></textarea>
+          <p class="field-label">Colour</p>
+          <div id="colorGroup" class="chips swatches" role="group" aria-label="Text colour">
+            <button type="button" class="swatch is-active" data-color="#ffffff" style="background:#ffffff" aria-label="White" aria-pressed="true"></button>
+            <button type="button" class="swatch" data-color="#ffd84d" style="background:#ffd84d" aria-label="Yellow" aria-pressed="false"></button>
+            <button type="button" class="swatch" data-color="#7cffb2" style="background:#7cffb2" aria-label="Green" aria-pressed="false"></button>
+            <button type="button" class="swatch" data-color="#ff7ab6" style="background:#ff7ab6" aria-label="Pink" aria-pressed="false"></button>
+            <button type="button" class="swatch" data-color="#000000" style="background:#000000" aria-label="Black" aria-pressed="false"></button>
+          </div>
+          <label class="check"><input id="textBox" type="checkbox"> Dark box behind the text</label>
+          <label class="field-label" for="textSize">Size</label>
+          <input id="textSize" class="range" type="range" min="4" max="14" value="8">
+          <p class="field-label">Position</p>
+          <div id="textPosGroup" class="chips" role="group" aria-label="Text position">
+            <button type="button" class="chip" data-ypos="15" aria-pressed="false">Top</button>
+            <button type="button" class="chip" data-ypos="50" aria-pressed="false">Middle</button>
+            <button type="button" class="chip is-active" data-ypos="78" aria-pressed="true">Bottom</button>
+          </div>
+          <label class="field-label" for="textY">Fine tune up / down</label>
+          <input id="textY" class="range" type="range" min="5" max="95" value="78">
+        </div>
+
+        <div id="musicTab" class="tab-panel is-hidden" role="tabpanel">
+          <label class="file-button" for="musicInput">Choose music from your device</label>
+          <input id="musicInput" type="file" accept="audio/*,.mp3,.m4a,.aac,.wav,.ogg,.opus,.flac" hidden>
+          <div id="musicInfo" class="music-info is-hidden"><b id="musicName"></b><button id="musicRemove" type="button" class="chip">Remove</button></div>
+          <div id="musicOptions" class="is-hidden">
+            <p class="field-label">Sound</p>
+            <div id="musicModeGroup" class="chips" role="group" aria-label="Sound">
+              <button type="button" class="chip is-active" data-music-mode="mix" aria-pressed="true">Mix with original sound</button>
+              <button type="button" class="chip" data-music-mode="replace" aria-pressed="false">Replace original sound</button>
+            </div>
+            <label class="field-label" for="musicVol">Music volume</label>
+            <input id="musicVol" class="range" type="range" min="0" max="100" value="70">
+          </div>
+          <p class="hint">Use an MP3, M4A or WAV saved on your phone (for example in the Files app). The music repeats if it is shorter than the video and continues across all parts. Only use music you have the right to use.</p>
+        </div>
+
+        <div id="captionTab" class="tab-panel is-hidden" role="tabpanel">
+          <label class="field-label" for="captionInput">Caption for your Status</label>
+          <textarea id="captionInput" class="text-field" rows="3" maxlength="700" placeholder="Write your caption"></textarea>
+          <button id="copyCaptionBtn" type="button" class="secondary-button">Copy caption</button>
+          <p class="hint">Some phones add the caption automatically when you share. If WhatsApp leaves the caption box empty, tap Copy caption and paste it there.</p>
+        </div>
+
         <label class="field-label" for="qualitySelect">Output quality</label>
         <select id="qualitySelect" class="select-field">
-          <option value="18">Very high quality</option>
-          <option value="21" selected>High quality</option>
-          <option value="25">Smaller file</option>
+          <option value="hd" selected>HD 720p (recommended)</option>
+          <option value="fast">Fast 540p (quicker)</option>
+          <option value="max">Max 1080p (slow)</option>
         </select>
-        <p class="hint">Videos up to 60 seconds stay as one video. Longer videos are split into 60-second parts. Everything happens on your device.</p>
+        <p class="hint">Everything happens on your device. WhatsApp always compresses a Status once more when you post it, so this prepares a clean video that keeps as much detail as possible.</p>
         <button id="processVideoBtn" class="primary-button" type="button">Prepare video</button>
       </div>
 
@@ -116,9 +207,13 @@
 
       <div id="videoResults" class="panel results-panel is-hidden">
         <h3>Your videos are ready</h3>
-        <p class="hint">Share the parts to WhatsApp in order. To avoid extra compression, choose HD when available.</p>
+        <p class="hint">Tap <b>Share</b>. If you see <b>My Status</b> in the share menu, tap it. Otherwise choose <b>WhatsApp</b>, then <b>My Status</b>. Post the parts in order. WhatsApp does not let a website post a Status for you.</p>
         <div id="videoDownloads" class="download-list"></div>
-        <button id="shareAllVideosBtn" class="primary-button" type="button">Share all parts</button>
+        <div id="resultCaptionRow" class="caption-row is-hidden">
+          <span>You wrote a caption.</span>
+          <button id="copyResultCaptionBtn" type="button" class="chip">Copy caption</button>
+        </div>
+        <button id="shareAllVideosBtn" class="primary-button" type="button">Share all parts to WhatsApp</button>
       </div>
     </section>
 
@@ -146,6 +241,9 @@
       <div id="photoInfo" class="panel is-hidden">
         <img id="photoPreview" alt="Selected photo preview">
         <div class="file-meta"><b id="photoName"></b><span id="photoMeta"></span></div>
+        <label class="field-label" for="photoCaption">Caption (optional)</label>
+        <textarea id="photoCaption" class="text-field" rows="2" maxlength="700" placeholder="Write your caption"></textarea>
+        <button id="copyPhotoCaptionBtn" type="button" class="secondary-button">Copy caption</button>
         <button id="processPhotoBtn" class="primary-button" type="button">Share original photo</button>
         <p class="hint">Your original file is shared without resizing or recompression. In the share menu, choose WhatsApp. Send it as a document if you want to avoid WhatsApp's image compression.</p>
       </div>
@@ -155,6 +253,6 @@
   </main>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="app.js" defer></script>
+  <script src="app.js?v=4" defer></script>
 </body>
 </html>
