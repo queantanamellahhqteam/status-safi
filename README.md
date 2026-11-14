@@ -1,33 +1,50 @@
 # STATUS SAFI
 
-Prepare videos and photos for WhatsApp Status, entirely on the device.
+Prepare videos and photos for WhatsApp Status, entirely on the device. Nothing is uploaded.
 
-## Files
+## Install
 
-Upload all four files to the root of the GitHub Pages repository, replacing the existing ones:
+Upload these four files to the root of the GitHub Pages repository, replacing the existing ones:
 
 - `index.html`
 - `style.css`
 - `app.js`
 - `README.md`
 
-Commit, then open the site in Safari (iPhone) or Chrome (Android). If an old version is still cached, reload the page or use a private tab.
+Commit, then open the site in Safari (iPhone) or Chrome (Android). The page links to `style.css?v=4` and `app.js?v=4`, so an old cached copy is not mixed with the new page. If something still looks wrong, reload or use a private tab.
 
-## What changed in this version
+## Video editor
 
-**Text visibility.** The interface was redesigned with solid colours, larger type and no blur, transparency or gradients behind text. Every text/background pair is at least 4.5:1 contrast. The page declares `color-scheme: light`, so browsers' automatic dark mode cannot invert colours and hide text. Fonts come from the system, so nothing is loaded from Google Fonts.
+After choosing a video you get these tabs:
 
-**Stuck at 10%.** The video engine used to load FFmpeg's worker from a CDN. Browsers, Safari in particular, silently refuse to start a worker from another origin, so loading never finished. The page no longer uses the `@ffmpeg/ffmpeg` wrapper. It downloads only the FFmpeg core (`@ffmpeg/core@0.12.10`, single-thread build) and runs it in a worker created from a Blob on the site's own origin. Also new:
+- **Crop**: Original, 9:16 Status, 4:5 or 1:1. For a shape that does not match the video you can *Fill* (crop the edges, with a slider to move the crop) or *Fit* (keep the whole picture over a blurred copy).
+- **Trim**: choose the start and end of the part you want to keep.
+- **Text**: type text (emoji and Swahili work), pick colour, size and position, with an optional dark box. The preview shows exactly what is burned into the video.
+- **Music**: pick an MP3, M4A or WAV saved on the phone. Mix it with the original sound or replace it, and set its volume. The music repeats if it is short and continues across split parts.
+- **Caption**: written here, copied with one tap, and sent along when the phone's share menu accepts it.
 
-- real download progress for the engine (about 30 MB, one time), with an automatic fallback from jsDelivr to unpkg
-- a 90-second startup timeout and a stall detector, with an error message that includes technical details
-- the video file is read directly by the worker instead of being copied into memory first
-- an elapsed-time counter, and the screen is kept awake while processing (where supported)
-- a **Save** button next to **Share** for browsers that cannot share files
+Output is H.264 + AAC (HD 720p by default, 540p and 1080p available), 30 fps at most, split into 60-second parts in order. Videos over 700 MB are refused because phone browsers run out of memory.
 
-## Behaviour
+## Sharing to WhatsApp Status
 
-- Videos over 60 seconds are split into consecutive 60-second parts, in order. The original aspect ratio and orientation are kept.
-- Photos are shared as the original file, without resizing or recompression. Send them as a document in WhatsApp to avoid its image compression.
-- Processing is local and needs internet only to download the video engine the first time.
-- Mobile browsers have memory limits. Very large videos may fail; the page then shows a clear message.
+A website cannot post a Status for you. The most it can do is open the phone's share menu with the finished file:
+
+1. Tap **Share** (or **Share all parts**).
+2. If the menu has **My Status**, tap it. Otherwise choose **WhatsApp**, then **My Status**.
+3. WhatsApp always compresses a Status again when it is posted, so some softness can remain. The video is prepared at 720p with a controlled bitrate to keep as much detail as possible.
+
+The caption is passed on only when WhatsApp accepts it from the share menu. If the caption box is empty in WhatsApp, use **Copy caption** and paste it.
+
+## Photos
+
+Photos are shared as the original file, without resizing or recompression. Send as a document if you want to avoid WhatsApp's image compression.
+
+## How the video engine works
+
+The page downloads only the FFmpeg core (`@ffmpeg/core@0.12.10`, single-thread build, about 30 MB, once) from jsDelivr, with unpkg as a fallback. It runs in a Web Worker created from a Blob on the site's own origin, because browsers (Safari especially) refuse to start a worker whose script is on another origin. Progress, a startup timeout, a download stall detector and readable error messages are built in.
+
+## Known limits
+
+- Processing is slow on phones, often several minutes for a one-minute video. Keep the page open and the screen on.
+- Music from streaming apps (Spotify, Apple Music) is protected and cannot be picked; use files saved on the phone. Only use music you have the right to use.
+- The editor was tested in a scripted browser with a stand-in engine, and its filter graphs were run with desktop FFmpeg. It has not yet been run with the real WebAssembly core on a phone, so report any error shown under "Details".
