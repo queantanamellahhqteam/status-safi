@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f6f1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="STATUS SAFI — prepare videos and photos for WhatsApp Status.">
+  <title>STATUS SAFI</title>
+  <link rel="stylesheet" href="style.css?v=5">
+</head>
+<body>
+  <div id="splash" class="splash" aria-hidden="true">
+    <span class="mark mark-large"><b>SS</b><i></i></span>
+    <p class="splash-name">STATUS SAFI</p>
+    <p class="splash-tag">Clean Quality. Better Status.</p>
+  </div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#homePage" aria-label="STATUS SAFI home">
+        <span class="mark"><b>SS</b><i></i></span>
+        <span class="brand-name">STATUS <em>SAFI</em></span>
+      </a>
+      <button class="help-button" id="helpBtn" type="button" aria-label="Help">?</button>
+    </div>
+  </header>
+
+  <main id="app" class="app">
+
+    <section id="homePage" class="page active">
+      <div class="hero">
+        <p class="eyebrow">Welcome to STATUS SAFI</p>
+        <h1>Make your status <span>look exceptional.</span></h1>
+        <p class="hero-text">Edit your videos and photos for WhatsApp Status: trim, crop, add music and text. Videos longer than 60 seconds are automatically split into consecutive parts.</p>
+      </div>
+
+      <div class="tool-list">
+        <button class="tool-card" type="button" data-open="videoPage">
+          <span class="tool-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10.5 9.5v5l4.2-2.5z" fill="currentColor"/></svg>
+          </span>
+          <span class="tool-text">
+            <span class="tool-title">Enhance Video</span>
+            <span class="tool-desc">Trim, crop, add music and text. Optimized for Status.</span>
+          </span>
+          <span class="tool-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+          </span>
+        </button>
+
+        <button class="tool-card" type="button" data-open="photoPage">
+          <span class="tool-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg>
+          </span>
+          <span class="tool-text">
+            <span class="tool-title">Enhance Photo</span>
+            <span class="tool-desc">Turn a photo into a short video with music.</span>
+          </span>
+          <span class="tool-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+          </span>
+        </button>
+      </div>
+
+      <div class="notice">
+        <span class="notice-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        </span>
+        <p><b>Automatic video splitting.</b> Videos over 60 seconds are split into consecutive 60-second parts. Original orientation is preserved.</p>
+      </div>
+    </section>
+
+    <section id="videoPage" class="page">
+      <button class="back-button" type="button" data-back>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        Back to home
+      </button>
+
+      <div class="page-heading">
+        <p class="eyebrow">Video studio</p>
+        <h2>Enhance video</h2>
+        <p class="lead">Choose a video. You can trim it, crop it, add music (and pick where the song starts), text and stickers.</p>
+      </div>
+
+      <label class="upload-box" for="videoInput">
+        <span class="upload-symbol" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+        <b>Choose a video from your device</b>
+        <small>MP4, MOV and other formats your browser supports</small>
+      </label>
+      <input id="videoInput" type="file" accept="video/*" hidden>
+    </section>
+
+    <section id="photoPage" class="page">
+      <button class="back-button" type="button" data-back>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        Back to home
+      </button>
+
+      <div class="page-heading">
+        <p class="eyebrow">Photo studio</p>
+        <h2>Enhance photo</h2>
+        <p class="lead">Choose a photo. It becomes a short video that you can crop, set to music and decorate with text and stickers.</p>
+      </div>
+
+      <label class="upload-box" for="photoInput">
+        <span class="upload-symbol" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </span>
+        <b>Choose a photo from your device</b>
+        <small>JPG, PNG, HEIC (if your browser supports it)</small>
+      </label>
+      <input id="photoInput" type="file" accept="image/*" hidden>
+
+      <div id="originalPhotoBox" class="panel is-hidden">
+        <p class="hint">Prefer no changes at all? Share the untouched original file instead (no music, no watermark).</p>
+        <button id="shareOriginalPhotoBtn" class="secondary-button" type="button">Share original photo</button>
+      </div>
+    </section>
+
+    <section id="resultPage" class="page">
+      <button class="back-button" type="button" data-back>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        Back to home
+      </button>
+
+      <div class="page-heading">
+        <p class="eyebrow">Almost there</p>
+        <h2 id="resultTitle">Preparing your video</h2>
+      </div>
+
+      <div id="videoProgress" class="panel progress-panel is-hidden" aria-live="polite">
+        <div class="progress-top">
+          <b id="progressText">Preparing video engine…</b>
+          <span id="progressPercent">0%</span>
+        </div>
+        <div id="progressTrack" class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progressBar"></span></div>
+        <p id="progressHint" class="hint">Keep this page open while processing. The first use needs internet to download the video engine.</p>
+        <button id="progressEditBtn" class="secondary-button is-hidden" type="button">Back to editing</button>
+      </div>
+
+      <div id="videoResults" class="panel results-panel is-hidden">
+        <h3 id="resultsHeading">Your video is ready</h3>
+        <button id="sendMeBtn" class="primary-button" type="button">Send to my WhatsApp</button>
+        <ol class="flow">
+          <li><b>Send it to yourself.</b> Tap the green button, choose <b>WhatsApp</b>, then your own chat (<b>You</b>). If WhatsApp shows an <b>HD</b> option, turn it on.</li>
+          <li><b>Forward it.</b> Open that chat, press and hold the video, tap <b>Forward</b> (or <b>Share</b>) and choose <b>My Status</b>.</li>
+          <li><b>Post it.</b> The video is already prepared, so Status usually keeps more of its quality.</li>
+        </ol>
+
+        <div class="me-box">
+          <label class="field-label" for="meNumber">Your WhatsApp number</label>
+          <input id="meNumber" class="text-field" type="tel" inputmode="tel" autocomplete="tel" placeholder="+255 7XX XXX XXX">
+          <a id="openMeChat" class="secondary-button as-link is-disabled" href="#" target="_blank" rel="noopener" aria-disabled="true">Open my WhatsApp chat</a>
+          <p class="hint">Saved on this phone only. A website cannot choose the chat for you, so pick <b>You</b> in the share menu.</p>
+        </div>
+
+        <p class="field-label">Your files</p>
+        <div id="videoDownloads" class="download-list"></div>
+        <div id="resultCaptionRow" class="caption-row is-hidden">
+          <span>You wrote a caption.</span>
+          <button id="copyResultCaptionBtn" type="button" class="chip-button ghost">Copy caption</button>
+        </div>
+        <button id="editAgainBtn" class="secondary-button" type="button">Edit again</button>
+        <button id="anotherBtn" class="secondary-button" type="button">Start another</button>
+      </div>
+    </section>
+
+    <footer class="footer">© Queantanamellah HQ. All rights reserved.</footer>
+  </main>
+
+  <!-- Full-screen editor (video and photo) -->
+  <div id="editor" class="editor is-hidden" role="dialog" aria-modal="true" aria-label="Editor" data-kind="video">
+    <header class="ed-top">
+      <button id="edCancel" class="ed-cancel" type="button">Cancel</button>
+      <h2 id="edTitle" class="ed-title">Edit Video</h2>
+      <button id="edDone" class="ed-done" type="button">Done</button>
+    </header>
+
+    <div id="stageWrap" class="ed-stagewrap">
+      <div id="stage" class="stage">
+        <video id="videoBg" class="stage-bg only-video is-hidden" muted playsinline aria-hidden="true" tabindex="-1"></video>
+        <video id="videoPreview" class="only-video" playsinline preload="auto"></video>
+        <img id="photoBg" class="stage-bg only-photo is-hidden" alt="" aria-hidden="true">
+        <img id="photoPreview" class="only-photo" alt="Selected photo preview">
+        <canvas id="overlayCanvas" class="stage-overlay" aria-label="Text and stickers: drag to move"></canvas>
+      </div>
+    </div>
+
+    <div class="ed-player">
+      <button id="edPlay" class="ed-play" type="button" aria-label="Play">
+        <svg id="iconPlay" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>
+        <svg id="iconPause" class="is-hidden" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4.5h4v15H6zM14 4.5h4v15h-4z"/></svg>
+      </button>
+      <span id="edTime" class="ed-time">0:00</span>
+      <input id="edScrub" class="ed-scrub" type="range" min="0" max="1" step="0.01" value="0" aria-label="Position">
+      <span id="edTotal" class="ed-time">0:00</span>
+    </div>
+
+    <div id="edSheet" class="ed-sheet is-hidden">
+
+      <div class="tool-panel is-hidden" data-panel="trim">
+        <div class="only-video">
+          <div class="dual" id="dual">
+            <div class="dual-track"><i class="dual-fill"></i></div>
+            <input id="trimStart" class="dual-input" type="range" min="0" max="1" step="0.1" value="0" aria-label="Start of the video">
+            <input id="trimEnd" class="dual-input" type="range" min="0" max="1" step="0.1" value="1" aria-label="End of the video">
+          </div>
+          <div class="range-row"><span>Start <output id="trimStartLabel">0:00.0</output></span><span>End <output id="trimEndLabel">0:00.0</output></span></div>
+          <p id="trimSummary" class="ed-hint"></p>
+        </div>
+        <div class="only-photo">
+          <div class="range-row"><label for="photoLen">How long should it play?</label><output id="photoLenLabel">7 s</output></div>
+          <input id="photoLen" class="ed-range" type="range" min="3" max="30" step="1" value="7">
+          <p class="ed-hint">The photo plays as a short video. Add music to bring it to life.</p>
+        </div>
+      </div>
+
+      <div class="tool-panel is-hidden" data-panel="music">
+        <label class="ed-file" for="musicInput">Choose music from your phone</label>
+        <input id="musicInput" type="file" accept="audio/*,.mp3,.m4a,.aac,.wav,.ogg,.opus,.flac" hidden>
+        <div id="musicInfo" class="music-info is-hidden"><b id="musicName"></b><button id="musicRemove" class="ed-chip" type="button">Remove</button></div>
+        <div id="musicOptions" class="is-hidden">
+          <p class="ed-label">Where should the song start? <output id="musicStartLabel">0:00</output></p>
+          <canvas id="waveCanvas" class="wave" aria-label="Song waveform: tap or drag to choose the start"></canvas>
+          <input id="musicStart" class="ed-range" type="range" min="0" max="1" step="0.1" value="0" aria-label="Song start">
+          <p class="ed-hint">Tap or drag on the song, then press play to hear it with your video. The bright part is what your video will use.</p>
+          <p class="ed-label">Sound</p>
+          <div id="musicModeGroup" class="ed-chips" role="group" aria-label="Sound">
+            <button type="button" class="ed-chip is-active" data-music-mode="mix" aria-pressed="true">Mix with original sound</button>
+            <button type="button" class="ed-chip" data-music-mode="replace" aria-pressed="false">Replace original sound</button>
+          </div>
+          <label class="ed-label" for="musicVol">Music volume</label>
+          <input id="musicVol" class="ed-range" type="range" min="0" max="100" value="70">
+        </div>
+        <p class="ed-hint">Use an MP3, M4A or WAV saved on your phone, for example in the Files app. The song repeats if it is shorter than your video and continues across all parts. Only use music you have the right to use.</p>
+      </div>
+
+      <div class="tool-panel is-hidden" data-panel="crop">
+        <p class="ed-label">Shape</p>
+        <div id="aspectGroup" class="ed-chips" role="group" aria-label="Shape">
+          <button type="button" class="ed-chip is-active" data-aspect="orig" aria-pressed="true">Original</button>
+          <button type="button" class="ed-chip" data-aspect="9:16" aria-pressed="false">9:16 Status</button>
+          <button type="button" class="ed-chip" data-aspect="4:5" aria-pressed="false">4:5</button>
+          <button type="button" class="ed-chip" data-aspect="1:1" aria-pressed="false">1:1</button>
+        </div>
+        <div id="fitGroup" class="is-hidden">
+          <p class="ed-label">How to fit</p>
+          <div id="fitChips" class="ed-chips" role="group" aria-label="How to fit">
+            <button type="button" class="ed-chip is-active" data-fit="fill" aria-pressed="true">Fill (crop the edges)</button>
+            <button type="button" class="ed-chip" data-fit="fit" aria-pressed="false">Fit (blurred sides)</button>
+          </div>
+        </div>
+        <div id="posGroup" class="is-hidden">
+          <label class="ed-label" for="cropPos">Move the crop <span id="posAxis"></span></label>
+          <input id="cropPos" class="ed-range" type="range" min="0" max="100" value="50">
+        </div>
+        <p class="ed-hint">Choose 9:16 for a full-screen Status. "Fit" keeps the whole picture and fills the empty space with a blurred copy.</p>
+      </div>
+
+      <div class="tool-panel is-hidden" data-panel="text">
+        <button id="addTextBtn" class="ed-primary" type="button">+ Add text</button>
+        <div id="textEdit" class="is-hidden">
+          <label class="ed-label" for="textInput">Text</label>
+          <textarea id="textInput" class="ed-text" rows="2" maxlength="140" placeholder="Type your text here"></textarea>
+          <p class="ed-label">Colour</p>
+          <div id="colorGroup" class="ed-chips swatches" role="group" aria-label="Text colour">
+            <button type="button" class="swatch is-active" data-color="#ffffff" style="background:#ffffff" aria-label="White" aria-pressed="true"></button>
+            <button type="button" class="swatch" data-color="#ffd84d" style="background:#ffd84d" aria-label="Yellow" aria-pressed="false"></button>
+            <button type="button" class="swatch" data-color="#7cffb2" style="background:#7cffb2" aria-label="Green" aria-pressed="false"></button>
+            <button type="button" class="swatch" data-color="#ff7ab6" style="background:#ff7ab6" aria-label="Pink" aria-pressed="false"></button>
+            <button type="button" class="swatch" data-color="#000000" style="background:#000000" aria-label="Black" aria-pressed="false"></button>
+          </div>
+          <label class="ed-check"><input id="textBox" type="checkbox"> Background box</label>
+          <label class="ed-label" for="textSize">Size</label>
+          <input id="textSize" class="ed-range" type="range" min="4" max="14" value="8">
+          <button id="deleteTextBtn" class="ed-chip danger" type="button">Delete text</button>
+        </div>
+        <p class="ed-hint">Drag the text on the picture to move it.</p>
+      </div>
+
+      <div class="tool-panel is-hidden" data-panel="sticker">
+        <div id="emojiGrid" class="emoji-grid" role="group" aria-label="Stickers"></div>
+        <div id="stickerEdit" class="is-hidden">
+          <label class="ed-label" for="stickerSize">Sticker size</label>
+          <input id="stickerSize" class="ed-range" type="range" min="8" max="50" value="22">
+          <button id="deleteStickerBtn" class="ed-chip danger" type="button">Delete sticker</button>
+        </div>
+        <p class="ed-hint">Tap a sticker to add it, then drag it on the picture.</p>
+      </div>
+
+      <div class="tool-panel is-hidden" data-panel="options">
+        <p class="ed-label">Quality</p>
+        <div id="qualityGroup" class="ed-chips" role="group" aria-label="Quality">
+          <button type="button" class="ed-chip is-active" data-quality="hd" aria-pressed="true">HD 720p</button>
+          <button type="button" class="ed-chip" data-quality="fast" aria-pressed="false">Fast 540p</button>
+          <button type="button" class="ed-chip" data-quality="max" aria-pressed="false">Max 1080p (slow)</button>
+        </div>
+        <label class="ed-label" for="captionInput">Caption for your Status</label>
+        <textarea id="captionInput" class="ed-text" rows="2" maxlength="700" placeholder="Write your caption"></textarea>
+        <button id="copyCaptionBtn" class="ed-chip" type="button">Copy caption</button>
+        <p class="ed-hint">A small STATUS SAFI mark is added at the bottom right. Everything is processed on your phone and never uploaded.</p>
+      </div>
+    </div>
+
+    <nav class="ed-tray" aria-label="Edit tools">
+      <button class="ed-tool" type="button" data-tool="trim">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.5" y="5.5" width="11" height="13" rx="2.2"/><path d="M3.5 8.5l-2 3.5 2 3.5M20.5 8.5l2 3.5-2 3.5"/></svg>
+        <span class="only-video">Trim</span><span class="only-photo">Length</span>
+      </button>
+      <button class="ed-tool" type="button" data-tool="music">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V6.5l10-2V16"/><circle cx="6.5" cy="18" r="2.6"/><circle cx="16.5" cy="16" r="2.6"/></svg>
+        <span>Music</span>
+      </button>
+      <button class="ed-tool" type="button" data-tool="crop">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v14h14M3 7h14v14"/></svg>
+        <span>Crop</span>
+      </button>
+      <button class="ed-tool" type="button" data-tool="sticker">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.2c.9 1.5 2.1 2.2 3.5 2.2s2.6-.7 3.5-2.2"/><path d="M9 9.5h.01M15 9.5h.01" stroke-width="3"/></svg>
+        <span>Sticker</span>
+      </button>
+      <button class="ed-tool" type="button" data-tool="text">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><text x="1" y="18" font-size="17" font-weight="800" font-family="-apple-system, Arial, sans-serif">Aa</text></svg>
+        <span>Text</span>
+      </button>
+      <button class="ed-tool" type="button" data-tool="options">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h7M15 7h5M4 12h3M11 12h9M4 17h10M18 17h2"/><circle cx="13" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="16" cy="17" r="2"/></svg>
+        <span>More</span>
+      </button>
+    </nav>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js?v=5" defer></script>
+</body>
+</html>
